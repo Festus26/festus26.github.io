@@ -1,4 +1,4 @@
-    <!-- Add a notification container -->
+<!-- Add a notification container -->
     <div id="notification-container"></div>
     
     <!-- Scripts -->
@@ -6,5 +6,6 @@
     <script src="js/space-animation.js"></script>
     <script src="js/space-effects.js"></script>
     <script src="js/github.js"></script>
+    <script src="js/nav-animations.js"></script>
 </body>
 </html>

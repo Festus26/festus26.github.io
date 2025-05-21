@@ -1,0 +1,150 @@
+/* Navigation Animations CSS - Fixed Version */
+
+/* Make sure styles have proper specificity */
+header nav .nav-links a {
+    position: relative;
+    padding: 5px 0;
+    margin: 0 15px;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    overflow: hidden;
+}
+
+header nav .nav-links a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+header nav .nav-links a:hover {
+    color: var(--primary-color);
+}
+
+header nav .nav-links a:hover::before {
+    transform: translateX(0);
+}
+
+header nav .nav-links a.active {
+    color: var(--primary-color);
+}
+
+header nav .nav-links a.active::before {
+    transform: translateX(0);
+    box-shadow: 0 0 8px var(--primary-color);
+}
+
+/* Logo animation */
+header nav .logo {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+header nav .logo:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(255, 123, 0, 0.4);
+}
+
+/* Mobile menu toggle animations */
+header nav .menu-toggle {
+    transition: transform 0.3s ease;
+}
+
+header nav .menu-toggle:hover {
+    transform: rotate(90deg);
+}
+
+header nav .menu-toggle i {
+    transition: all 0.3s ease;
+}
+
+header nav .menu-toggle.active i {
+    transform: rotate(90deg);
+}
+
+/* Mobile menu slide down animation */
+header nav .nav-links {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+header nav .nav-links.active {
+    animation: slideDown 0.5s forwards;
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Nav Indicator - Animated highlight for current section */
+.nav-indicator {
+    position: absolute;
+    bottom: -2px;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 0 8px var(--primary-color);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Scroll indicator - animated progress bar in header */
+.scroll-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    transition: width 0.2s ease;
+    z-index: 1000;
+}
+
+/* Navigation reveal animation - when scrolling up */
+header.nav-reveal {
+    transform: translateY(-100%);
+    transition: transform 0.4s ease;
+}
+
+header.nav-reveal.visible {
+    transform: translateY(0);
+}
+
+/* Navigation glow effect on scroll */
+header.scrolled .nav-links a:hover {
+    text-shadow: 0 0 8px rgba(255, 123, 0, 0.5);
+}
+
+/* Page transition overlay */
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--dark-color);
+    z-index: 9999;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in-out;
+}
+
+.page-transition.active {
+    transform: translateX(0);
+}
+
+.page-transition.exit {
+    transform: translateX(100%);
+}

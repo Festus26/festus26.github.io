@@ -1,0 +1,62 @@
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/space-animation.js"></script>
+    <script src="js/space-effects.js"></script>
+    <script src="js/github.js"></script>
+    <script src="js/nav-animations.js"></script>
+    
+    <!-- Debug Console Toggle (press 'D' key to show console) -->
+    <script>
+    document.addEventListener('keydown', function(e) {
+        if (e.key.toLowerCase() === 'd' && e.altKey) {
+            if (!window._debugConsole) {
+                window._debugConsole = document.createElement('div');
+                window._debugConsole.style.cssText = `
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 200px;
+                    background: rgba(0,0,0,0.85);
+                    color: white;
+                    z-index: 10000;
+                    overflow-y: auto;
+                    padding: 10px;
+                    font-family: monospace;
+                    font-size: 12px;
+                    border-top: 2px solid var(--primary-color);
+                `;
+                
+                // Redirect console.log/error
+                const oldLog = console.log;
+                const oldError = console.error;
+                
+                console.log = function(...args) {
+                    oldLog.apply(console, args);
+                    const message = args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' ');
+                    const line = document.createElement('div');
+                    line.textContent = '> ' + message;
+                    window._debugConsole.appendChild(line);
+                    window._debugConsole.scrollTop = window._debugConsole.scrollHeight;
+                };
+                
+                console.error = function(...args) {
+                    oldError.apply(console, args);
+                    const message = args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' ');
+                    const line = document.createElement('div');
+                    line.textContent = '> ERROR: ' + message;
+                    line.style.color = '#ff6b6b';
+                    window._debugConsole.appendChild(line);
+                    window._debugConsole.scrollTop = window._debugConsole.scrollHeight;
+                };
+                
+                document.body.appendChild(window._debugConsole);
+            } else {
+                window._debugConsole.remove();
+                window._debugConsole = null;
+            }
+        }
+    });
+    </script>
+</body>
+</html>

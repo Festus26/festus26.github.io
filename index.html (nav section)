@@ -2,6 +2,7 @@
     <div class="logo">Portfolio</div>
     <div class="nav-links">
         <a href="#home">Home</a>
+        <a href="#team-sermath">Team Sermath</a>
         <a href="#games">Games</a>
         <a href="#tech">Tech Projects</a>
         <a href="#github">GitHub</a>

@@ -1,0 +1,117 @@
+    <section id="about" class="about">
+        <!-- ...existing about section content... -->
+    </section>
+
+    <!-- Team Sermath Section -->
+    <section id="team-sermath" class="team-sermath">
+        <div class="container">
+            <div class="team-header">
+                <div class="team-logo">
+                    <img src="images/team-sermath-logo.png" alt="Team Sermath Logo">
+                </div>
+                <h2>Team Sermath</h2>
+                <p class="team-tagline">Crafting Unforgettable Game Experiences</p>
+            </div>
+            
+            <div class="team-content">
+                <!-- About Team Sermath -->
+                <div class="team-section">
+                    <h3>About Team Sermath</h3>
+                    <div class="team-about">
+                        <p>Team Sermath is an indie game development studio founded with a passion for creating innovative and engaging games. We focus on unique gameplay mechanics, compelling narratives, and immersive worlds that captivate players.</p>
+                        <p>Our small but dedicated team brings together diverse talents in programming, art, sound design, and storytelling to craft experiences that stand out in today's gaming landscape.</p>
+                        <div class="team-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">5</span>
+                                <span class="stat-label">Team Members</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3</span>
+                                <span class="stat-label">Released Games</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">2</span>
+                                <span class="stat-label">Games in Development</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Sermath Games -->
+                <div class="team-section">
+                    <h3>Our Games</h3>
+                    <div class="team-games">
+                        <!-- Game 1 -->
+                        <div class="team-game-card">
+                            <div class="game-img">
+                                <img src="images/game1.jpg" alt="Cosmic Odyssey">
+                            </div>
+                            <div class="game-info">
+                                <h4>Cosmic Odyssey</h4>
+                                <div class="game-meta">
+                                    <span class="game-platform">PC | Steam</span>
+                                    <span class="game-release">Released: 2023</span>
+                                </div>
+                                <p>A space exploration adventure where players navigate through a procedurally generated universe, discovering new planets, alien species, and uncovering the mysteries of ancient civilizations.</p>
+                                <div class="game-links">
+                                    <a href="#" class="btn btn-sm">Play Now</a>
+                                    <a href="#" class="btn btn-sm btn-outline">View Trailer</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Game 2 -->
+                        <div class="team-game-card">
+                            <div class="game-img">
+                                <img src="images/game2.jpg" alt="Neon Shadows">
+                            </div>
+                            <div class="game-info">
+                                <h4>Neon Shadows</h4>
+                                <div class="game-meta">
+                                    <span class="game-platform">PC | Mobile</span>
+                                    <span class="game-release">Released: 2022</span>
+                                </div>
+                                <p>A cyberpunk stealth game where players take on the role of a hacker infiltrating corrupt corporations in a dystopian future. Features unique hacking mechanics and multiple approaches to each mission.</p>
+                                <div class="game-links">
+                                    <a href="#" class="btn btn-sm">Play Now</a>
+                                    <a href="#" class="btn btn-sm btn-outline">View Trailer</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Game 3 -->
+                        <div class="team-game-card">
+                            <div class="game-img">
+                                <img src="images/game3.jpg" alt="Ethereal Realms">
+                            </div>
+                            <div class="game-info">
+                                <h4>Ethereal Realms</h4>
+                                <div class="game-meta">
+                                    <span class="game-platform">PC | Consoles</span>
+                                    <span class="game-release">Coming 2024</span>
+                                </div>
+                                <p>Our upcoming fantasy RPG featuring a unique magic system based on elemental combinations. Players will explore a rich world with dynamic environments that react to their magical abilities.</p>
+                                <div class="game-links">
+                                    <a href="#" class="btn btn-sm">Wishlist</a>
+                                    <a href="#" class="btn btn-sm btn-outline">Development Blog</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-footer">
+                <a href="#" class="team-website-link">Visit Team Sermath's Website <i class="fas fa-external-link-alt"></i></a>
+                <div class="team-social">
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Steam"><i class="fab fa-steam"></i></a>
+                    <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="games" class="projects">
+        <!-- ...existing games section content... -->

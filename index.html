@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/github.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Portfolio</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#games">Games</a>
+                <a href="#tech">Tech Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <canvas id="space-canvas"></canvas>
+        <div class="hero-content">
+            <h1>Game Developer</h1>
+            <p>Creating immersive experiences through code</p>
+            <a href="#games" class="btn">View My Work</a>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-image animate slide-left">
+                    <img src="images/profile.jpg" alt="Profile picture">
+                </div>
+                <div class="about-text animate slide-right">
+                    <p>I am a Computer Science graduate specializing in game development. With a passion for creating interactive experiences, I blend technical expertise with artistic vision to bring digital worlds to life.</p>
+                    <p>My technical skills include game engines like Unity and Unreal, programming languages such as C#, C++, and JavaScript.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-artstation"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="games" class="projects">
+        <div class="container">
+            <h2>Games</h2>
+            <div class="project-grid">
+                <!-- Game Project Cards will be dynamically loaded from main.js -->
+            </div>
+        </div>
+    </section>
+
+    <section id="tech" class="projects">
+        <div class="container">
+            <h2>Tech Projects</h2>
+            <div class="project-grid">
+                <!-- Tech Project Cards will be dynamically loaded from main.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Repositories Section -->
+    <section id="github" class="github-section">
+        <div class="container">
+            <div class="github-header">
+                <i class="fab fa-github github-header-icon"></i>
+                <h2>My GitHub Projects</h2>
+            </div>
+            <p class="section-intro text-center">Check out my latest open-source projects and contributions on GitHub.</p>
+            <div id="github-repos">
+                <!-- GitHub repositories will be dynamically loaded from github.js -->
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Game Development</h3>
+                    <ul>
+                        <li>Unity</li>
+                        <li>Unreal Engine</li>
+                        <li>Game Design</li>
+                        <li>Level Design</li>
+                        <li>C#</li>
+                        <li>C++</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <ul>
+                        <li>Java</li>
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>Algorithms</li>
+                        <li>Data Structures</li>
+                        <li>Problem Solving</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Web Development</h3>
+                    <ul>
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>JavaScript</li>
+                        <li>React</li>
+                        <li>Node.js</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <div class="contact-content">
+                <form id="contact-form" class="animate slide-left">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+                <div class="contact-info animate slide-right">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>your.email@example.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Your Location</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <p>+1 (123) 456-7890</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Game Developer Portfolio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Add a notification container -->
+    <div id="notification-container"></div>
+    
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/space-animation.js"></script>
+    <script src="js/space-effects.js"></script>
+    <script src="js/github.js"></script>
+</body>
+</html>

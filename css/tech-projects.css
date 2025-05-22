@@ -1,0 +1,257 @@
+/* Tech Project Cards Styling */
+.tech-section {
+    background-color: #0a0a14;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+    color: var(--text-color);
+    border-top: 1px solid rgba(255, 123, 0, 0.2);
+}
+
+/* Section header styling */
+.tech-section h2 {
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.tech-section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 15px auto 0;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Project grid layout */
+.tech-project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tech project card styling */
+.tech-project-card {
+    background-color: rgba(30, 30, 40, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    height: 500px; /* Increased height */
+    position: relative;
+}
+
+.tech-project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 123, 0, 0.3);
+}
+
+/* Image slider styling */
+.tech-project-slider {
+    position: relative;
+    height: 240px; /* Increased height */
+    overflow: hidden;
+    background-color: rgba(20, 20, 30, 0.8); /* Darker background for images */
+}
+
+.tech-project-slider-container {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother easing */
+    height: 100%;
+    width: 100%;
+}
+
+.tech-project-slider-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border between images */
+}
+
+/* Image counter badge */
+.slider-counter {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Slider navigation */
+.slider-nav {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+.slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.slider-dot.active {
+    background-color: var(--primary-color);
+    transform: scale(1.2);
+    box-shadow: 0 0 8px var(--primary-color);
+}
+
+/* Left/Right slider controls */
+.slider-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.slider-control.prev {
+    left: 10px;
+}
+
+.slider-control.next {
+    right: 10px;
+}
+
+.tech-project-slider:hover .slider-control {
+    opacity: 0.8;
+}
+
+.slider-control:hover {
+    background-color: var(--primary-color);
+    opacity: 1 !important;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Project info styling */
+.tech-project-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tech-project-info h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.tech-project-info p {
+    margin-bottom: 20px;
+    flex-grow: 1;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    max-height: 120px;
+    overflow-y: auto;
+    padding-right: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 123, 0, 0.3) rgba(30, 30, 40, 0.1);
+}
+
+/* Custom scrollbar for webkit browsers */
+.tech-project-info p::-webkit-scrollbar {
+    width: 4px;
+}
+
+.tech-project-info p::-webkit-scrollbar-track {
+    background: rgba(30, 30, 40, 0.1);
+    border-radius: 4px;
+}
+
+.tech-project-info p::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 123, 0, 0.3);
+    border-radius: 4px;
+}
+
+.tech-project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.tech-project-tag {
+    font-size: 0.75rem;
+    background-color: rgba(255, 123, 0, 0.1);
+    color: var(--text-muted);
+    padding: 3px 10px;
+    border-radius: 15px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255, 123, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.tech-project-tag:hover {
+    background-color: rgba(255, 123, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tech-project-links {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.tech-project-links a.btn {
+    transition: all 0.3s ease;
+}
+
+.tech-project-links a.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .tech-project-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .tech-project-card {
+        height: auto;
+        min-height: 450px;
+    }
+}

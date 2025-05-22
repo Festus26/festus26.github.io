@@ -118,7 +118,7 @@ const gameProjects = [
     {
         title: "Space Explorer",
         description: "A 3D space exploration game built with Unity where players can explore different planets and complete missions.",
-        image: "images/game1.jpg",
+        image: "images/game1.png",
         tags: ["Unity", "C#", "3D Game"],
         platform: "PC | Steam",
         technology: "Unity Engine",
@@ -150,24 +150,24 @@ const gameProjects = [
 const techProjects = [
     {
         title: "AI Image Generator",
-        description: "A web application that uses machine learning to generate images based on text descriptions.",
-        image: "images/tech1.jpg",
+        description: "A web application that uses machine learning to generate images based on text descriptions. Users can input prompts and receive AI-generated artwork in various styles.",
+        images: ["images/game1.png", "images/tech1-2.jpg", "images/tech1-3.jpg"],
         tags: ["Python", "TensorFlow", "React"],
         demo: "#",
         github: "#"
     },
     {
         title: "Game Development Toolkit",
-        description: "A custom toolkit for Unity that streamlines the game development workflow with reusable components.",
-        image: "images/tech2.jpg",
+        description: "A custom toolkit for Unity that streamlines the game development workflow with reusable components. Includes advanced physics systems, procedural level generation, and AI behavior tools.",
+        images: ["images/tech2.jpg", "images/tech2-2.jpg", "images/tech2-3.jpg"],
         tags: ["C#", "Unity", "Editor Scripting"],
         demo: "#",
         github: "#"
     },
     {
         title: "Procedural World Generator",
-        description: "An algorithm for generating realistic 3D worlds with terrain, vegetation, and cities.",
-        image: "images/tech3.jpg",
+        description: "An algorithm for generating realistic 3D worlds with terrain, vegetation, and cities. Features advanced biome systems, river networks, and dynamic weather patterns that affect the environment.",
+        images: ["images/tech3.jpg", "images/tech3-2.jpg", "images/tech3-3.jpg"],
         tags: ["C++", "OpenGL", "Procedural Generation"],
         demo: "#",
         github: "#"
@@ -189,12 +189,12 @@ function loadProjects() {
     }
     
     // Load tech projects
-    const techGrid = document.querySelector('#tech .project-grid');
+    const techGrid = document.querySelector('#tech .tech-project-grid');
     if (techGrid) {
         techGrid.innerHTML = '';
         
         techProjects.forEach((project, index) => {
-            const projectCard = createProjectCard(project);
+            const projectCard = createTechProjectCard(project);
             projectCard.style.transitionDelay = `${index * 0.1}s`;
             projectCard.classList.add('visible'); // Make sure cards are visible initially
             techGrid.appendChild(projectCard);
@@ -203,6 +203,9 @@ function loadProjects() {
     
     // Initialize tooltips for project tags
     initializeTooltips();
+    
+    // Initialize sliders after they are added to the DOM
+    initializeSliders();
 }
 
 function createGameCard(project) {
@@ -261,11 +264,9 @@ function createProjectCard(project) {
     `;
     
     return card;
-}
-
-// Add tooltip functionality
+}    // Add tooltip functionality
 function initializeTooltips() {
-    const tags = document.querySelectorAll('.tag');
+    const tags = document.querySelectorAll('.tag, .tech-project-tag');
     
     tags.forEach(tag => {
         tag.addEventListener('mouseover', function(e) {
@@ -311,3 +312,168 @@ function getTagDescription(tag) {
 
 // Make showNotification available globally
 window.showNotification = showNotification;
+
+// Function to create tech project cards with image sliders
+function createTechProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = 'tech-project-card';
+    
+    const tagsHTML = project.tags ? project.tags.map(tag => `<span class="tech-project-tag" title="${getTagDescription(tag)}">${tag}</span>`).join('') : '';
+    
+    // Ensure project.images is an array (fallback for older project data)
+    const images = project.images || [project.image || 'images/placeholder.jpg'];
+    
+    // Create image slider HTML
+    const sliderImagesHTML = images.map(image => 
+        `<img src="${image}" alt="${project.title}">`
+    ).join('');
+    
+    // Create slider dots HTML (only if multiple images)
+    const sliderDotsHTML = images.length > 1 ? 
+        images.map((_, index) => 
+            `<div class="slider-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></div>`
+        ).join('') : '';
+    
+    // Add image counter for multiple images
+    const sliderCounter = images.length > 1 ? 
+        `<div class="slider-counter">1/${images.length}</div>` : '';
+    
+    card.innerHTML = `
+        <div class="tech-project-slider" data-project="${project.title.replace(/\s+/g, '-').toLowerCase()}">
+            ${images.length > 1 ? `
+            <div class="slider-control prev">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="slider-control next">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            ${sliderCounter}
+            ` : ''}
+            <div class="tech-project-slider-container">
+                ${sliderImagesHTML}
+            </div>
+            ${sliderDotsHTML ? `<div class="slider-nav">${sliderDotsHTML}</div>` : ''}
+        </div>
+        <div class="tech-project-info">
+            <h3>${project.title}</h3>
+            <p>${project.description}</p>
+            <div class="tech-project-tags">
+                ${tagsHTML}
+            </div>
+            <div class="tech-project-links">
+                <a href="${project.demo}" class="btn btn-sm">Live Demo</a>
+                <a href="${project.github}" class="btn btn-sm btn-outline">GitHub</a>
+            </div>
+        </div>
+    `;
+    
+    return card;
+}
+
+// Initialize all image sliders
+function initializeSliders() {
+    const sliders = document.querySelectorAll('.tech-project-slider');
+    
+    sliders.forEach(slider => {
+        const container = slider.querySelector('.tech-project-slider-container');
+        const dots = slider.querySelectorAll('.slider-dot');
+        const prevBtn = slider.querySelector('.slider-control.prev');
+        const nextBtn = slider.querySelector('.slider-control.next');
+        const counter = slider.querySelector('.slider-counter');
+        
+        // Only initialize slider if it has multiple images
+        if (container.children.length <= 1) {
+            return;
+        }
+        
+        const imageCount = container.children.length;
+        let currentIndex = 0;
+        
+        // Function to navigate to a specific slide
+        const goToSlide = (index) => {
+            currentIndex = (index + imageCount) % imageCount; // Ensure index is in range
+            container.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Update active dot
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+            
+            // Update counter if it exists
+            if (counter) {
+                counter.textContent = `${currentIndex + 1}/${imageCount}`;
+            }
+        };
+        
+        // Set up event listeners for dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+        
+        // Set up event listeners for prev/next buttons
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                goToSlide(currentIndex - 1);
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                goToSlide(currentIndex + 1);
+            });
+        }
+        
+        // Add keyboard navigation when slider is hovered
+        slider.addEventListener('mouseenter', () => {
+            slider.setAttribute('tabindex', '0');
+            slider.focus({preventScroll: true});
+        });
+        
+        slider.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                goToSlide(currentIndex - 1);
+                e.preventDefault();
+            } else if (e.key === 'ArrowRight') {
+                goToSlide(currentIndex + 1);
+                e.preventDefault();
+            }
+        });
+        
+        // Auto-rotate slides every 5 seconds
+        const sliderId = slider.dataset.project;
+        let intervalId = setInterval(() => goToSlide(currentIndex + 1), 5000);
+        
+        // Pause auto-rotation on hover
+        slider.addEventListener('mouseenter', () => clearInterval(intervalId));
+        slider.addEventListener('mouseleave', () => {
+            intervalId = setInterval(() => goToSlide(currentIndex + 1), 5000);
+        });
+        
+        // Add swipe gesture support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        slider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimum distance for a swipe
+            
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swipe left, go to next slide
+                goToSlide(currentIndex + 1);
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                // Swipe right, go to previous slide
+                goToSlide(currentIndex - 1);
+            }
+        }
+    });
+}

@@ -66,12 +66,28 @@ section.active-section::before {
     background: linear-gradient(to bottom, rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.5));
 }
 
+#about::before {
+    background-image: 
+        radial-gradient(1.2px 1.2px at 30% 30%, var(--accent-color) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 60%, var(--secondary-color) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 40% 40%, var(--primary-color) 0%, transparent 100%);
+    background-size: 130px 130px;
+}
+
 #team-sermath::before {
     background-image: 
         radial-gradient(1px 1px at 25% 25%, var(--accent-color) 0%, transparent 100%),
         radial-gradient(1px 1px at 75% 75%, var(--secondary-color) 0%, transparent 100%),
         radial-gradient(2px 2px at 50% 50%, var(--primary-color) 0%, transparent 100%);
     background-size: 150px 150px;
+}
+
+#games::before {
+    background-image: 
+        radial-gradient(1px 1px at 20% 20%, var(--accent-color) 0%, transparent 100%),
+        radial-gradient(1px 1px at 65% 65%, var(--secondary-color) 0%, transparent 100%),
+        radial-gradient(1.8px 1.8px at 45% 45%, var(--primary-color) 0%, transparent 100%);
+    background-size: 140px 140px;
 }
 
 #skills::before {

@@ -1,0 +1,120 @@
+/* Smooth section transitions */
+
+/* Common background for all sections */
+.section-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    pointer-events: none;
+}
+
+/* Seamless section transitions */
+section {
+    position: relative;
+}
+
+section::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(18, 18, 18, 0), var(--dark-color));
+    z-index: 2;
+    pointer-events: none;
+}
+
+section + section::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to top, rgba(18, 18, 18, 0), var(--dark-color));
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Active section highlight */
+section.active-section {
+    z-index: 5;
+}
+
+section.active-section::before {
+    opacity: 0.08;
+    animation: pulseBackground 4s ease-in-out infinite;
+}
+
+@keyframes pulseBackground {
+    0% { opacity: 0.04; }
+    50% { opacity: 0.08; }
+    100% { opacity: 0.04; }
+}
+
+/* Section transitions on scroll */
+.fade-transition {
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Custom transition for each section type */
+#home {
+    background: linear-gradient(to bottom, rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.5));
+}
+
+#team-sermath::before {
+    background-image: 
+        radial-gradient(1px 1px at 25% 25%, var(--accent-color) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 75%, var(--secondary-color) 0%, transparent 100%),
+        radial-gradient(2px 2px at 50% 50%, var(--primary-color) 0%, transparent 100%);
+    background-size: 150px 150px;
+}
+
+#skills::before {
+    background-image: 
+        radial-gradient(1.5px 1.5px at 25% 25%, var(--accent-color) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 75%, var(--secondary-color) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 50%, var(--primary-color) 0%, transparent 100%);
+    background-size: 120px 120px;
+}
+
+/* Fixed background elements that show through sections */
+.bg-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+    pointer-events: none;
+    opacity: 0.6;
+    background-image: 
+        radial-gradient(1px 1px at 10% 10%, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.7), rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 30% 70%, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 40% 40%, rgba(255, 255, 255, 0.7), rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 60% 30%, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 70% 70%, rgba(255, 255, 255, 0.7), rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 80% 20%, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 90% 50%, rgba(255, 255, 255, 0.7), rgba(0, 0, 0, 0));
+    background-size: 200% 200%;
+    animation: floatingStars 100s linear infinite;
+}
+
+@keyframes floatingStars {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* Fix for mobile */
+@media (max-width: 768px) {
+    section::after,
+    section + section::before {
+        height: 30px;
+    }
+}

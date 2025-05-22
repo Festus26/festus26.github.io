@@ -1,5 +1,10 @@
 /* Navigation Animations CSS - Fixed Version */
 
+/* Global smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
 /* Make sure styles have proper specificity */
 header nav .nav-links a {
     position: relative;
@@ -7,7 +12,7 @@ header nav .nav-links a {
     margin: 0 15px;
     color: var(--text-color);
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
     overflow: hidden;
 }
 
@@ -33,6 +38,7 @@ header nav .nav-links a:hover::before {
 
 header nav .nav-links a.active {
     color: var(--primary-color);
+    transform: scale(1.05);
 }
 
 header nav .nav-links a.active::before {
@@ -93,12 +99,40 @@ header nav .nav-links.active {
 .nav-indicator {
     position: absolute;
     bottom: -2px;
-    height: 2px;
+    height: 3px;
     background-color: var(--primary-color);
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 0 8px var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
     pointer-events: none;
     z-index: 10;
+    opacity: 0.8;
+}
+
+/* Pulse animation for active nav item */
+@keyframes navPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 123, 0, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 123, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 123, 0, 0);
+    }
+}
+
+/* Add subtle indicator dot to active nav item */
+header nav .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: navPulse 1.5s infinite;
 }
 
 /* Scroll indicator - animated progress bar in header */

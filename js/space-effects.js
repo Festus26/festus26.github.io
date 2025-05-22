@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add orbit decorations to certain sections
 function addOrbitDecorations() {
-    const sectionsForOrbits = ['about', 'skills', 'contact'];
+    const sectionsForOrbits = ['about', 'skills'];
     
     sectionsForOrbits.forEach(sectionId => {
         const section = document.getElementById(sectionId);

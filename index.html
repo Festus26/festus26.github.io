@@ -8,12 +8,17 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/github.css">
     <link rel="stylesheet" href="css/team-sermath.css">
+    <link rel="stylesheet" href="css/section-transitions.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
+    <!-- Fixed background elements -->
+    <div class="bg-stars"></div>
+    
     <header>
+        <div class="scroll-progress"></div>
         <nav>
             <div class="logo">Portfolio</div>
             <div class="nav-links">
@@ -23,7 +28,6 @@
                 <a href="#tech">Tech Projects</a>
                 <a href="#github">GitHub</a>
                 <a href="#skills">Skills</a>
-                <a href="#contact">Contact</a>
             </div>
             <div class="menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -245,43 +249,6 @@
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <div class="contact-content">
-                <form id="contact-form" class="animate slide-left">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
-                <div class="contact-info animate slide-right">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <p>your.email@example.com</p>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>Your Location</p>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <p>+1 (123) 456-7890</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer>
         <div class="container">
             <p>&copy; 2023 Game Developer Portfolio. All Rights Reserved.</p>
@@ -296,5 +263,6 @@
     <script src="js/space-animation.js"></script>
     <script src="js/space-effects.js"></script>
     <script src="js/github.js"></script>
+    <script src="js/section-transitions.js"></script>
 </body>
 </html>

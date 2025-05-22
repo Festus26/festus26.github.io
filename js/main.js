@@ -15,14 +15,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-            
-            // Close mobile menu after clicking a link
-            if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
+            if (targetElement) {
+                // Highlight the clicked navigation item
+                document.querySelectorAll('.nav-links a').forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu after clicking a link
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
             }
         });
     });
@@ -30,13 +38,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Scroll animations
     const header = document.querySelector('header');
     const animatedElements = document.querySelectorAll('.project-card, .skill-category');
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
+    const scrollProgress = document.querySelector('.scroll-progress');
     
-    // Change header on scroll
+    // Change header on scroll and highlight current section in navigation
     window.addEventListener('scroll', function() {
         if (window.scrollY > 100) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
+        }
+        
+        // Update scroll progress bar
+        if (scrollProgress) {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
         }
         
         // Animate elements when they come into view
@@ -48,55 +66,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.classList.add('visible');
             }
         });
+        
+        // Highlight current section in navigation
+        let currentSectionId = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            
+            if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight - 100) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+        
+        // Add 'active' class to the corresponding navigation item
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            const href = item.getAttribute('href').substring(1);
+            if (href === currentSectionId) {
+                item.classList.add('active');
+            }
+        });
     });
     
     // Trigger scroll once to check initial positions
     window.dispatchEvent(new Event('scroll'));
-    
-    // Contact form submission with animation
-    const contactForm = document.getElementById('contact-form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Add sending state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.classList.add('sending');
-            
-            // Collect form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
-            
-            // Simulate sending (replace with actual API call)
-            setTimeout(() => {
-                console.log('Form Data:', formData);
-                
-                // Show success message
-                submitBtn.textContent = 'Sent!';
-                submitBtn.classList.remove('sending');
-                submitBtn.classList.add('success');
-                
-                // Show success message
-                showNotification('Thank you for your message! I will get back to you soon.', 'success');
-                
-                // Reset form
-                contactForm.reset();
-                
-                // Reset button after delay
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.classList.remove('success');
-                }, 3000);
-            }, 1500);
-        });
-    }
     
     // Notification system
     function showNotification(message, type = 'info') {

@@ -1,6 +1,7 @@
 # Local tool files
 project-manager.html
 *.local.html
+js/file-saver.js
 
 # OS files
 .DS_Store

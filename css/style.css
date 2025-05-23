@@ -357,7 +357,7 @@ nav {
     padding: 12px 30px;
     font-size: 1.1rem;
     border-radius: 30px;
-    background-color: #3498db;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);

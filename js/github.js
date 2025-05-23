@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // GitHub username - replace with your own
     const username = 'Festus26'; // ⚠️ IMPORTANT: REPLACE WITH YOUR ACTUAL GITHUB USERNAME
     
-    // Number of repositories to display
-    const repoLimit = 6;
+    // Number of repositories to display - setting to 100 to load all repositories
+    const repoLimit = 100;
     
     // Show loading state
     repoContainer.innerHTML = `
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewMoreLink.rel = 'noopener noreferrer';
         viewMoreLink.innerHTML = isDemo ? 
             'These are sample repositories' : 
-            'View More on GitHub <i class="fab fa-github"></i>';
+            'Visit My GitHub Profile <i class="fab fa-github"></i>';
         
         if (isDemo) {
             viewMoreLink.style.cursor = 'default';

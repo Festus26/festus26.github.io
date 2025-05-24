@@ -116,31 +116,31 @@ document.addEventListener('DOMContentLoaded', function() {
 // Sample project data - you would replace this with your actual projects
 const gameProjects = [
     {
-        title: "Space Explorer",
-        description: "A 3D space exploration game built with Unity where players can explore different planets and complete missions.",
+        title: "Clean Go",
+        description: "So, what do you think applications that claim to speed up your computer actually do? This game, which consists of blood, sweat and pixels in real terms, leaves you with a newfound data and a very impatient gamer.",
         image: "images/game1.png",
-        tags: ["Unity", "C#", "3D Game"],
-        platform: "PC | Steam",
+        tags: ["Unity", "C#", "3D", "Arcade"],
+        platform: "PC",
+        technology: "Unity Engine",
+        demo: "https://teamsermath.itch.io/clean-go",
+        github: "#"
+    },
+    {
+        title: "Sci Run",
+        description: "A mad scientist works on a different virus. However, something goes wrong and the scientist starts to run after this disappointment to save humanity which suddenly falls under his responsibility.",
+        image: "images/game2.jpg",
+        tags: ["Unity", "C#", "3D", "Runner"],
+        platform: "Mobile",
         technology: "Unity Engine",
         demo: "#",
         github: "#"
     },
     {
-        title: "Dungeon Crawler",
-        description: "A procedurally generated dungeon crawler game with pixel art aesthetics and roguelike elements.",
-        image: "images/game2.jpg",
-        tags: ["Unreal Engine", "C++", "Procedural Generation"],
-        platform: "PC | Consoles",
-        technology: "Unreal Engine",
-        demo: "#",
-        github: "#"
-    },
-    {
-        title: "Strategy Tactics",
-        description: "A turn-based strategy game inspired by classic tactical RPGs, featuring unique character classes and abilities.",
+        title: "Anti-Goodness Department",
+        description: "In this universe, life is so simple. There is a corperation called Anti-Goodness Department which in charge of eliminate good people. This agency is tasked with rooting out good people and preparing worst life for their world.",
         image: "images/game3.jpg",
-        tags: ["Unity", "C#", "Game Design"],
-        platform: "PC | Mobile",
+        tags: ["Unity", "C#", "3D", "Adventure"],
+        platform: "PC",
         technology: "Unity Engine",
         demo: "#",
         github: "#"
@@ -212,7 +212,15 @@ function createGameCard(project) {
     const card = document.createElement('div');
     card.className = 'game-card';
     
-    const tagsHTML = project.tags ? project.tags.map(tag => `<span class="tag" title="${getTagDescription(tag)}">${tag}</span>`).join('') : '';
+    // Removed title attribute for game tags to disable hover descriptions
+    const tagsHTML = project.tags ? project.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : '';
+    
+    // Prepare conditional buttons HTML
+    const demoButton = (project.demo && project.demo !== '#') ? 
+        `<a href="${project.demo}" class="btn btn-sm">Play Now</a>` : '';
+    
+    const githubButton = (project.github && project.github !== '#') ? 
+        `<a href="${project.github}" class="btn btn-sm btn-outline">View Source</a>` : '';
     
     card.innerHTML = `
         <div class="game-img">
@@ -229,8 +237,8 @@ function createGameCard(project) {
                 ${tagsHTML}
             </div>
             <div class="game-links">
-                <a href="${project.demo}" class="btn btn-sm">Play Now</a>
-                <a href="${project.github}" class="btn btn-sm btn-outline">View Source</a>
+                ${demoButton}
+                ${githubButton}
             </div>
         </div>
     `;
@@ -266,7 +274,8 @@ function createProjectCard(project) {
     return card;
 }    // Add tooltip functionality
 function initializeTooltips() {
-    const tags = document.querySelectorAll('.tag, .tech-project-tag');
+    // Only initialize tooltips for tech project tags, not for game project tags
+    const tags = document.querySelectorAll('.tech-project-tag');
     
     tags.forEach(tag => {
         tag.addEventListener('mouseover', function(e) {

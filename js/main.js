@@ -142,7 +142,7 @@ const gameProjects = [
         tags: ["Unity", "C#", "3D", "Adventure"],
         platform: "PC",
         technology: "Unity Engine",
-        demo: "#",
+        demo: "https://teamsermath.itch.io/agd",
         github: "#"
     }
 ];

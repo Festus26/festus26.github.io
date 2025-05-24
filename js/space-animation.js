@@ -30,9 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const nebulae = [];
     const numNebulae = 5; // Increased for more color
     
-    // Add supernovas
-    const supernovas = [];
-    
     // Add meteors
     const meteors = [];
     
@@ -87,35 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 speed: (Math.random() - 0.5) * 0.2,
                 phase: Math.random() * Math.PI * 2
             });
-        }
-    }
-    
-    // Create a supernova
-    function createSupernova() {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const maxRadius = Math.random() * 100 + 50;
-        
-        const hue = Math.floor(Math.random() * 360);
-        const color = `hsl(${hue}, 100%, 70%)`;
-        const outerColor = `hsla(${hue}, 100%, 50%, 0)`;
-        
-        supernovas.push({
-            x, y,
-            radius: 0,
-            maxRadius,
-            color,
-            outerColor,
-            speed: Math.random() * 2 + 1,
-            opacity: 1,
-            growing: true
-        });
-    }
-    
-    // Random chance to create a supernova
-    function maybeCreateSupernova() {
-        if (Math.random() < 0.001) { // 0.1% chance per frame
-            createSupernova();
         }
     }
     
@@ -239,52 +207,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ctx.fillStyle = gradient;
             ctx.fill();
         });
-    }
-    
-    // Update and draw supernovas
-    function updateSupernovas() {
-        for (let i = supernovas.length - 1; i >= 0; i--) {
-            const nova = supernovas[i];
-            
-            if (nova.growing) {
-                // Expand the supernova
-                nova.radius += nova.speed;
-                
-                // Start fading out when reaching max radius
-                if (nova.radius >= nova.maxRadius) {
-                    nova.growing = false;
-                }
-            } else {
-                // Fade out
-                nova.opacity -= 0.01;
-                
-                // Remove when completely faded
-                if (nova.opacity <= 0) {
-                    supernovas.splice(i, 1);
-                    continue;
-                }
-            }
-            
-            // Draw the supernova
-            const gradient = ctx.createRadialGradient(
-                nova.x, nova.y, 0,
-                nova.x, nova.y, nova.radius
-            );
-            gradient.addColorStop(0, nova.color.replace('1)', `${nova.opacity})`));
-            gradient.addColorStop(0.7, nova.color.replace('1)', `${nova.opacity * 0.5})`));
-            gradient.addColorStop(1, nova.outerColor);
-            
-            ctx.beginPath();
-            ctx.arc(nova.x, nova.y, nova.radius, 0, Math.PI * 2);
-            ctx.fillStyle = gradient;
-            ctx.fill();
-            
-            // Add a glow effect
-            ctx.beginPath();
-            ctx.arc(nova.x, nova.y, nova.radius * 1.2, 0, Math.PI * 2);
-            ctx.fillStyle = nova.outerColor.replace('0)', `${nova.opacity * 0.2})`);
-            ctx.fill();
-        }
     }
     
     // Update and draw meteors
@@ -435,13 +357,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Draw elements
         drawNebulae();
         drawStars();
-        updateSupernovas();
         updateMeteors();
         updateShootingStars();
         
         // Create new elements with random chance
         maybeCreateShootingStar();
-        maybeCreateSupernova();
         maybeCreateMeteor();
         
         // Continue animation

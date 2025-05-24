@@ -568,18 +568,59 @@
     }
 }
 
+/* Mobile-first approach for touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .team-game-card:hover {
+        /* Remove hover effects on touch devices */
+        transform: none;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    
+    .team-game-card:hover::before,
+    .team-game-card:hover::after {
+        opacity: 0;
+    }
+    
+    .team-game-card:hover iframe {
+        filter: none;
+    }
+    
+    /* Add tap effect instead */
+    .team-game-card:active {
+        transform: scale(0.98);
+    }
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
     .team-games {
-        gap: 25px;
-        padding: 20px;
+        gap: 20px;
+        padding: 15px;
         border-radius: 15px;
     }
     
     .team-game-card {
         flex-direction: column;
-        margin: 0 5px;
+        margin: 0;
         border-radius: 12px;
+        /* Reduce intensive effects on mobile */
+        backdrop-filter: blur(5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        /* Disable floating animation on mobile */
+        animation: steamCardAppear 0.8s ease-out forwards;
+    }
+    
+    .team-game-card:hover {
+        /* Reduce hover effects on mobile for better performance */
+        transform: translateY(-2px) scale(1.005);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    }
+    
+    .team-game-card iframe {
+        height: 190px !important;
+        width: 100% !important;
+        border-radius: 10px;
     }
     
     .game-img {
@@ -597,71 +638,149 @@
     }
     
     .team-section {
-        padding: 30px 20px;
+        padding: 30px 15px;
     }
     
-    .team-game-card iframe {
-        height: 160px !important;
-        border-radius: 10px;
-    }
-    
-    .team-game-card:hover {
-        transform: translateY(-4px) scale(1.01);
-    }
-    
+    /* Reduce decorative elements on mobile */
     .team-games::after {
         top: 10px;
         right: 10px;
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
     }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 600px) {
+    .team-games {
+        gap: 15px;
+        padding: 12px;
+    }
+    
+    .team-game-card {
+        margin: 0;
+        border-radius: 10px;
+        /* Further reduce effects for smaller screens */
+        backdrop-filter: blur(3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+    }
+    
+    .team-game-card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    
     .team-game-card iframe {
-        height: 150px !important;
-        width: calc(100% - 10px) !important;
-        margin: 5px;
+        height: 180px !important;
+        width: 100% !important;
+        border-radius: 8px;
+    }
+    
+    .team-section {
+        padding: 25px 10px;
     }
 }
 
 @media (max-width: 480px) {
     .team-game-card {
         margin: 0;
-        border-radius: 10px;
+        border-radius: 8px;
+        /* Minimal effects for very small screens */
+        backdrop-filter: blur(2px);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .team-game-card:hover {
+        /* Minimal hover effect */
+        transform: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
     }
     
     .team-game-card iframe {
-        height: 140px !important;
-        border-radius: 8px;
+        height: 170px !important;
+        border-radius: 6px;
         width: 100% !important;
         margin: 0;
     }
     
     .team-games {
-        gap: 20px;
-        padding: 15px;
-        border-radius: 12px;
+        gap: 12px;
+        padding: 10px;
+        border-radius: 10px;
     }
     
     .team-games::before {
-        top: -15px;
-        width: 40px;
+        top: -12px;
+        width: 35px;
     }
     
     .team-games::after {
-        display: none; /* Hide corner accent on very small screens */
+        display: none; /* Hide corner accent on small screens */
+    }
+    
+    .team-section {
+        padding: 20px 8px;
     }
 }
 
 /* Extra small screens (narrow phones) */
 @media (max-width: 360px) {
+    .team-game-card {
+        border-radius: 6px;
+        /* Minimal styling for very narrow screens */
+        backdrop-filter: none;
+        background-color: rgba(30, 30, 40, 0.9);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .team-game-card:hover {
+        transform: none;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    }
+    
     .team-game-card iframe {
-        height: 120px !important;
+        height: 160px !important;
+        border-radius: 4px;
     }
     
     .team-games {
-        padding: 10px;
-        gap: 15px;
+        padding: 8px;
+        gap: 10px;
+        border-radius: 8px;
+    }
+    
+    .team-section {
+        padding: 15px 5px;
+    }
+    
+    .team-games::before {
+        display: none; /* Hide decorative elements */
+    }
+}
+
+/* Landscape phone optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+    .team-game-card iframe {
+        height: 150px !important;
+    }
+    
+    .team-games {
+        gap: 10px;
+    }
+}
+
+/* Performance optimization for mobile devices */
+@media (max-width: 768px) {
+    .team-game-card::before,
+    .team-game-card::after {
+        display: none; /* Remove decorative pseudo-elements on mobile */
+    }
+    
+    .team-game-card {
+        /* Disable will-change on mobile to save memory */
+        will-change: auto;
+    }
+    
+    .team-game-card iframe {
+        will-change: auto;
     }
 }

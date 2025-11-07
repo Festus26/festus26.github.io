@@ -116,16 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // Sample project data - you would replace this with your actual projects
 const gameProjects = [
     {
-        title: "Clean Go",
-        description: "So, what do you think applications that claim to speed up your computer actually do? This game, which consists of blood, sweat and pixels in real terms, leaves you with a newfound data and a very impatient gamer.",
-        image: "https://img.itch.zone/aW1nLzY1MTM1NDEucG5n/315x250%23c/9qvQb6.png",
-        tags: ["Unity", "C#", "3D", "Arcade"],
-        platform: "PC",
-        technology: "Unity Engine",
-        demo: "https://teamsermath.itch.io/clean-go",
-        github: "#"
-    },
-    {
         title: "Sci Run",
         description: "A mad scientist works on a different virus. However, something goes wrong and the scientist starts to run after this disappointment to save humanity which suddenly falls under his responsibility.",
         image: "https://img.itch.zone/aW1nLzEwMzIzNjcyLnBuZw==/315x250%23c/FB31rG.png",
@@ -133,6 +123,16 @@ const gameProjects = [
         platform: "Mobile",
         technology: "Unity Engine",
         demo: "#",
+        github: "#"
+    },
+    {
+        title: "Clean Go",
+        description: "So, what do you think applications that claim to speed up your computer actually do? This game, which consists of blood, sweat and pixels in real terms, leaves you with a newfound data and a very impatient gamer.",
+        image: "https://img.itch.zone/aW1nLzY1MTM1NDEucG5n/315x250%23c/9qvQb6.png",
+        tags: ["Unity", "C#", "3D", "Arcade"],
+        platform: "PC",
+        technology: "Unity Engine",
+        demo: "https://teamsermath.itch.io/clean-go",
         github: "#"
     },
     {

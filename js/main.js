@@ -118,7 +118,7 @@ const gameProjects = [
     {
         title: "Clean Go",
         description: "So, what do you think applications that claim to speed up your computer actually do? This game, which consists of blood, sweat and pixels in real terms, leaves you with a newfound data and a very impatient gamer.",
-        image: "images/game1.png",
+        image: "https://img.itch.zone/aW1nLzY1MTM1NDEucG5n/315x250%23c/9qvQb6.png",
         tags: ["Unity", "C#", "3D", "Arcade"],
         platform: "PC",
         technology: "Unity Engine",
@@ -128,7 +128,7 @@ const gameProjects = [
     {
         title: "Sci Run",
         description: "A mad scientist works on a different virus. However, something goes wrong and the scientist starts to run after this disappointment to save humanity which suddenly falls under his responsibility.",
-        image: "images/game2.jpg",
+        image: "https://img.itch.zone/aW1nLzEwMzIzNjcyLnBuZw==/315x250%23c/FB31rG.png",
         tags: ["Unity", "C#", "3D", "Runner"],
         platform: "Mobile",
         technology: "Unity Engine",
@@ -138,7 +138,7 @@ const gameProjects = [
     {
         title: "Anti-Goodness Department",
         description: "In this universe, life is so simple. There is a corperation called Anti-Goodness Department which in charge of eliminate good people. This agency is tasked with rooting out good people and preparing worst life for their world.",
-        image: "images/game3.jpg",
+        image: "https://img.itch.zone/aW1nLzYxNzA2MDEucG5n/315x250%23c/X%2BcgYg.png",
         tags: ["Unity", "C#", "3D", "Adventure"],
         platform: "PC",
         technology: "Unity Engine",

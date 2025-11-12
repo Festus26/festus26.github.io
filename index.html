@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/team-sermath.css?v=1.2.0">
     <link rel="stylesheet" href="css/section-transitions.css?v=1.2.0">
     <link rel="stylesheet" href="css/game-cards.css?v=1.2.0">
+    <link rel="stylesheet" href="css/game-demo.css?v=1.2.0">
     <link rel="stylesheet" href="css/tech-projects.css?v=1.2.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -72,13 +73,24 @@
             </div>
         </div>
     </section>
-    <section class="divider">
-        <iframe 
-            src="https://festus26.github.io/game_of_life/game_of_life.html" 
-            width="800" 
-            height="800" 
-            style="border:none;">
-        </iframe>
+    
+    <!-- Game of Life Interactive Demo -->
+    <section id="game-of-life-demo" class="game-demo-section">
+        <div class="container">
+            <h2>🎮 Interactive Demo: Conway's Game of Life</h2>
+            <p class="demo-description">Experience my implementation of the classic cellular automaton</p>
+            <div class="game-demo-container">
+                <iframe 
+                    src="game_of_life/game_of_life.html" 
+                    class="game-demo-iframe"
+                    title="Conway's Game of Life Interactive Demo"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="demo-info">
+                <i class="fas fa-info-circle"></i> Built with C and raylib, compiled to WebAssembly
+            </p>
+        </div>
     </section>
 
     <!-- Team Sermath Section -->

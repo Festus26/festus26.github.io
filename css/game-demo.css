@@ -1,0 +1,214 @@
+/* Game of Life Demo Section Styling */
+
+.game-demo-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f1624 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-demo-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--primary-color) 50%, 
+        transparent 100%);
+}
+
+.game-demo-section h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(255, 123, 0, 0.5);
+}
+
+.demo-description {
+    text-align: center;
+    color: #ffbf69;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.game-demo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 0 20px rgba(255, 123, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-demo-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        var(--primary-color), 
+        #ff9500, 
+        var(--primary-color));
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0.3;
+    animation: borderGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes borderGlow {
+    0% {
+        opacity: 0.3;
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 0.6;
+        filter: blur(10px);
+    }
+}
+
+.game-demo-iframe {
+    width: 100%;
+    height: 700px;
+    border: none;
+    border-radius: 15px;
+    display: block;
+    background: #000;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.demo-info {
+    text-align: center;
+    color: #cbd5e0;
+    font-size: 1rem;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.demo-info i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+/* Decorative elements */
+.game-demo-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 100px;
+    background: radial-gradient(ellipse at center, 
+        rgba(255, 123, 0, 0.2) 0%, 
+        transparent 70%);
+    pointer-events: none;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .game-demo-iframe {
+        height: 600px;
+    }
+    
+    .game-demo-section h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-demo-section {
+        padding: 60px 0;
+    }
+    
+    .game-demo-section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .demo-description {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+    
+    .game-demo-container {
+        padding: 15px;
+        border-radius: 15px;
+    }
+    
+    .game-demo-iframe {
+        height: 500px;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-demo-section {
+        padding: 40px 0;
+    }
+    
+    .game-demo-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .demo-description {
+        font-size: 0.9rem;
+    }
+    
+    .game-demo-container {
+        padding: 10px;
+        border-radius: 10px;
+    }
+    
+    .game-demo-iframe {
+        height: 400px;
+    }
+    
+    .demo-info {
+        font-size: 0.85rem;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* Loading animation */
+.game-demo-iframe:not([loaded]) {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 123, 0, 0.1) 0%,
+        rgba(255, 123, 0, 0.2) 50%,
+        rgba(255, 123, 0, 0.1) 100%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .game-demo-container::before,
+    .game-demo-iframe:not([loaded]) {
+        animation: none;
+    }
+}

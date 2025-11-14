@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add orbit decorations to sections
     addOrbitDecorations();
     
-    // Add star trail effect on mouse movement
-    addStarTrailEffect();
+    // Add star trail effect on mouse movement - DISABLED
+    // addStarTrailEffect();
     
     // Add parallax effect to space elements
     addParallaxEffect();

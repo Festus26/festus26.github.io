@@ -23,6 +23,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background: #0f1624; /* also the backdrop around the board in fullscreen */
       }
 
       /* NOTE: Canvas *must not* have any border or padding, or mouse coords will be wrong.
@@ -161,7 +162,7 @@
             },
             onRuntimeInitialized: function() {
                 overlayElement.classList.add('hidden');
-                fullscreenButton.hidden = false;
+                fullscreenButton.hidden = !fullscreenSupported; // e.g. iPhone Safari has no element fullscreen
                 setTimeout(updateRendering, 0); // the main loop starts after this callback
                 if (document.activeElement !== canvasElement) hintElement.classList.remove('hidden');
             }
@@ -175,9 +176,31 @@
             if (overlayElement.classList.contains('hidden')) hintElement.classList.remove('hidden');
         });
 
+        // Native fullscreen on the stage: the canvas CSS already scales the board to fit any screen,
+        // so there's no need for emscripten's Module.requestFullscreen (which isn't exported anyway)
+        var stageElement = document.querySelector('#stage');
+        var fullscreenSupported = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
+
+        function isFullscreen() {
+            return !!(document.fullscreenElement || document.webkitFullscreenElement);
+        }
+
         fullscreenButton.addEventListener('click', function() {
-            Module.requestFullscreen(false, false);
+            if (isFullscreen()) {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            } else {
+                (stageElement.requestFullscreen || stageElement.webkitRequestFullscreen).call(stageElement);
+            }
+            canvasElement.focus({ preventScroll: true }); // keep keyboard controls working
         });
+
+        function updateFullscreenButton() {
+            var label = isFullscreen() ? 'Exit fullscreen' : 'Fullscreen';
+            fullscreenButton.title = label;
+            fullscreenButton.setAttribute('aria-label', label);
+        }
+        document.addEventListener('fullscreenchange', updateFullscreenButton);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
 
         // GLFW swallows wheel events on the canvas; the game doesn't use the wheel,
         // so stop them here and let the portfolio page scroll normally

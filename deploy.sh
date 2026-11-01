@@ -49,7 +49,7 @@ files_to_check=(
     "css/team-sermath.css"
     "css/style.css"
     "js/main.js"
-    "js/space-animation.js"
+    "background/space-animation.js"
 )
 
 for file in "${files_to_check[@]}"; do

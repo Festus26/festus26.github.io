@@ -68,13 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="empty-repos">
                         <i class="fas fa-folder-open"></i>
                         <p>No repositories found for this GitHub account.</p>
-                        <button id="load-demo-data" class="btn">Show Sample Repositories</button>
                     </div>
                 `;
-                
-                document.getElementById('load-demo-data').addEventListener('click', function() {
-                    displayRepositories(getDemoRepos());
-                });
             }
         } catch (error) {
             console.error('Error fetching repositories:', error);
@@ -82,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Display a rate limit error with option to see demo data
+    // Display a rate limit error with a link to the GitHub profile
     function displayRateLimitError(message) {
         repoContainer.innerHTML = `
             <div class="error-message rate-limit">
@@ -90,131 +85,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p>GitHub API rate limit exceeded</p>
                 <small>${message}</small>
                 <small>GitHub limits API requests to 60 per hour for unauthenticated requests.</small>
-                <button id="load-demo-data" class="btn" style="margin-top: 20px;">
-                    Show Sample Repositories
-                </button>
+                <a href="https://github.com/${username}" class="btn" target="_blank" rel="noopener noreferrer" style="margin-top: 20px;">
+                    Visit My GitHub Profile <i class="fab fa-github"></i>
+                </a>
             </div>
         `;
-        
-        document.getElementById('load-demo-data').addEventListener('click', function() {
-            displayRepositories(getDemoRepos(), true);
-        });
     }
     
-    // Display a generic error with option to see demo data
+    // Display a generic error with a link to the GitHub profile
     function displayGenericError(message) {
         repoContainer.innerHTML = `
             <div class="error-message">
                 <i class="fas fa-exclamation-circle"></i>
                 <p>Failed to load GitHub repositories</p>
                 <small>${message}</small>
-                <button id="load-demo-data" class="btn" style="margin-top: 20px;">
-                    Show Sample Repositories
-                </button>
+                <a href="https://github.com/${username}" class="btn" target="_blank" rel="noopener noreferrer" style="margin-top: 20px;">
+                    Visit My GitHub Profile <i class="fab fa-github"></i>
+                </a>
             </div>
         `;
-        
-        document.getElementById('load-demo-data').addEventListener('click', function() {
-            displayRepositories(getDemoRepos(), true);
-        });
     }
     
-    // Display a warning about demo data
-    function displayDemoWarning() {
-        const warningDiv = document.createElement('div');
-        warningDiv.className = 'demo-data-warning';
-        warningDiv.innerHTML = `
-            <i class="fas fa-info-circle"></i>
-            <p>Showing sample repository data</p>
-            <small>These are example projects and do not represent actual GitHub repositories.</small>
-        `;
-        
-        // Add warning before the repository container
-        const container = repoContainer.closest('.container');
-        
-        // Check if warning already exists
-        if (!container.querySelector('.demo-data-warning')) {
-            container.insertBefore(warningDiv, repoContainer);
-        }
-    }
-    
-    // Provides demo data if API fails
-    function getDemoRepos() {
-        // Create sample repositories that match your portfolio theme
-        return [
-            {
-                name: "space-exploration-game",
-                html_url: "https://github.com/Festus26/space-exploration-game",
-                description: "A 3D space exploration game built with Unity. Features procedural planet generation and interactive spacecraft controls.",
-                language: "C#",
-                updated_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3 days ago
-                stargazers_count: 42,
-                forks_count: 10,
-                private: false
-            },
-            {
-                name: "procedural-dungeon-generator",
-                html_url: "https://github.com/Festus26/procedural-dungeon-generator",
-                description: "A procedural dungeon generation algorithm for 2D games. Creates randomized but coherent level layouts with rooms and corridors.",
-                language: "JavaScript",
-                updated_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days ago
-                stargazers_count: 21,
-                forks_count: 5,
-                private: false
-            },
-            {
-                name: "portfolio-website",
-                html_url: "https://github.com/Festus26/portfolio-website",
-                description: "My personal game developer portfolio website built with HTML, CSS, and JavaScript. Features space animations and an interactive Game of Life.",
-                language: "HTML",
-                updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
-                stargazers_count: 12,
-                forks_count: 3,
-                private: false
-            },
-            {
-                name: "unity-toolkit",
-                html_url: "https://github.com/Festus26/unity-toolkit",
-                description: "A collection of reusable Unity components and utilities to speed up game development workflows.",
-                language: "C#",
-                updated_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(), // 14 days ago
-                stargazers_count: 35,
-                forks_count: 12,
-                private: false
-            },
-            {
-                name: "pixel-shader-collection",
-                html_url: "https://github.com/Festus26/pixel-shader-collection",
-                description: "A collection of custom GLSL shaders for real-time visual effects in games. Includes water, fire, and procedural sky effects.",
-                language: "GLSL",
-                updated_at: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(), // 20 days ago
-                stargazers_count: 28,
-                forks_count: 8,
-                private: false
-            },
-            {
-                name: "game-ai-experiments",
-                html_url: "https://github.com/Festus26/game-ai-experiments",
-                description: "Experiments with artificial intelligence techniques for games, including pathfinding, behavior trees, and machine learning for NPCs.",
-                language: "Python",
-                updated_at: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString(), // 25 days ago
-                stargazers_count: 19,
-                forks_count: 4,
-                private: false
-            }
-        ];
-    }
-    
-    function displayRepositories(repos, isDemo = false) {
+    function displayRepositories(repos) {
         // Clear loading state
         repoContainer.innerHTML = '';
         
         console.log("Displaying repositories...");
-        
-        // Show demo data warning if needed
-        if (isDemo) {
-            displayDemoWarning();
-        }
         
         // Create a card for each repository
         repos.forEach((repo, index) => {
@@ -282,18 +178,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add "View More" link to GitHub profile
         const viewMoreLink = document.createElement('a');
-        viewMoreLink.href = isDemo ? '#' : `https://github.com/${username}`;
+        viewMoreLink.href = `https://github.com/${username}`;
         viewMoreLink.className = 'btn view-more-repos';
-        viewMoreLink.target = isDemo ? '_self' : '_blank';
+        viewMoreLink.target = '_blank';
         viewMoreLink.rel = 'noopener noreferrer';
-        viewMoreLink.innerHTML = isDemo ? 
-            'These are sample repositories' : 
-            'Visit My GitHub Profile <i class="fab fa-github"></i>';
-        
-        if (isDemo) {
-            viewMoreLink.style.cursor = 'default';
-            viewMoreLink.addEventListener('click', e => e.preventDefault());
-        }
+        viewMoreLink.innerHTML = 'Visit My GitHub Profile <i class="fab fa-github"></i>';
         
         const viewMoreContainer = document.createElement('div');
         viewMoreContainer.className = 'view-more-container';

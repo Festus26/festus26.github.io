@@ -310,36 +310,6 @@
     font-size: 0.8rem;
 }
 
-/* Demo data warning */
-.demo-data-warning {
-    background-color: rgba(52, 152, 219, 0.1);
-    border-left: 4px solid #3498db;
-    padding: 15px 20px;
-    border-radius: 5px;
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.demo-data-warning i {
-    color: #3498db;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.demo-data-warning p {
-    color: var(--text-color);
-    margin-bottom: 5px;
-    font-weight: 500;
-}
-
-.demo-data-warning small {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-}
-
 /* Empty repos state */
 .empty-repos {
     display: flex;

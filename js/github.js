@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
             {
                 name: "portfolio-website",
                 html_url: "https://github.com/Festus26/portfolio-website",
-                description: "My personal game developer portfolio website built with HTML, CSS, and JavaScript. Features space animations and 3D model viewers.",
+                description: "My personal game developer portfolio website built with HTML, CSS, and JavaScript. Features space animations and an interactive Game of Life.",
                 language: "HTML",
                 updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
                 stargazers_count: 12,

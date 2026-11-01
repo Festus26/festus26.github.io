@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             const targetId = this.getAttribute('href');
+            if (targetId === '#') return; // placeholder link, nothing to scroll to
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
@@ -109,6 +110,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
     
+    // Make showNotification available globally
+    window.showNotification = showNotification;
+    
     // Load project data with staggered animations
     loadProjects();
 });
@@ -117,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const gameProjects = [
     {
         title: "Sci Run",
-        description: "A mad scientist works on a different virus. However, something goes wrong and the scientist starts to run after this disappointment to save humanity which suddenly falls under his responsibility.",
+        description: "A mad scientist is working on a new virus, but something goes wrong. Now he has to run to save humanity, which has suddenly become his responsibility.",
         image: "https://img.itch.zone/aW1nLzEwMzIzNjcyLnBuZw==/315x250%23c/FB31rG.png",
         tags: ["Unity", "C#", "3D", "Runner"],
         platform: "Mobile",
@@ -127,7 +131,7 @@ const gameProjects = [
     },
     {
         title: "Clean Go",
-        description: "So, what do you think applications that claim to speed up your computer actually do? This game, which consists of blood, sweat and pixels in real terms, leaves you with a newfound data and a very impatient gamer.",
+        description: "What do those apps that claim to speed up your computer actually do? Made of blood, sweat and pixels, this game lets you find out first-hand.",
         image: "https://img.itch.zone/aW1nLzY1MTM1NDEucG5n/315x250%23c/9qvQb6.png",
         tags: ["Unity", "C#", "3D", "Arcade"],
         platform: "PC",
@@ -137,39 +141,12 @@ const gameProjects = [
     },
     {
         title: "Anti-Goodness Department",
-        description: "In this universe, life is so simple. There is a corperation called Anti-Goodness Department which in charge of eliminate good people. This agency is tasked with rooting out good people and preparing worst life for their world.",
+        description: "In this universe, life is simple. A corporation called the Anti-Goodness Department is in charge of eliminating good people, rooting them out and making their world as miserable as possible.",
         image: "https://img.itch.zone/aW1nLzYxNzA2MDEucG5n/315x250%23c/X%2BcgYg.png",
         tags: ["Unity", "C#", "3D", "Adventure"],
         platform: "PC",
         technology: "Unity Engine",
         demo: "https://teamsermath.itch.io/agd",
-        github: "#"
-    }
-];
-
-const techProjects = [
-    {
-        title: "AI Image Generator",
-        description: "A web application that uses machine learning to generate images based on text descriptions. Users can input prompts and receive AI-generated artwork in various styles.",
-        images: ["images/game1.png", "images/tech1-2.jpg", "images/tech1-3.jpg"],
-        tags: ["Python", "TensorFlow", "React"],
-        demo: "#",
-        github: "#"
-    },
-    {
-        title: "Game Development Toolkit",
-        description: "A custom toolkit for Unity that streamlines the game development workflow with reusable components. Includes advanced physics systems, procedural level generation, and AI behavior tools.",
-        images: ["images/tech2.jpg", "images/tech2-2.jpg", "images/tech2-3.jpg"],
-        tags: ["C#", "Unity", "Editor Scripting"],
-        demo: "#",
-        github: "#"
-    },
-    {
-        title: "Procedural World Generator",
-        description: "An algorithm for generating realistic 3D worlds with terrain, vegetation, and cities. Features advanced biome systems, river networks, and dynamic weather patterns that affect the environment.",
-        images: ["images/tech3.jpg", "images/tech3-2.jpg", "images/tech3-3.jpg"],
-        tags: ["C++", "OpenGL", "Procedural Generation"],
-        demo: "#",
         github: "#"
     }
 ];
@@ -187,25 +164,6 @@ function loadProjects() {
             gameContainer.appendChild(gameCard);
         });
     }
-    
-    // Load tech projects
-    const techGrid = document.querySelector('#tech .tech-project-grid');
-    if (techGrid) {
-        techGrid.innerHTML = '';
-        
-        techProjects.forEach((project, index) => {
-            const projectCard = createTechProjectCard(project);
-            projectCard.style.transitionDelay = `${index * 0.1}s`;
-            projectCard.classList.add('visible'); // Make sure cards are visible initially
-            techGrid.appendChild(projectCard);
-        });
-    }
-    
-    // Initialize tooltips for project tags
-    initializeTooltips();
-    
-    // Initialize sliders after they are added to the DOM
-    initializeSliders();
 }
 
 function createGameCard(project) {
@@ -244,245 +202,4 @@ function createGameCard(project) {
     `;
     
     return card;
-}
-
-function createProjectCard(project) {
-    const card = document.createElement('div');
-    card.className = 'project-card';
-    
-    const tagsHTML = project.tags ? project.tags.map(tag => `<span class="tag" title="${getTagDescription(tag)}">${tag}</span>`).join('') : '';
-    
-    card.innerHTML = `
-        <div class="project-img">
-            <img src="${project.image}" alt="${project.title}">
-        </div>
-        <div class="project-info">
-            <div class="project-content">
-                <h3>${project.title}</h3>
-                <p>${project.description}</p>
-                <div class="tags">
-                    ${tagsHTML}
-                </div>
-            </div>
-            <div class="project-links">
-                <a href="${project.demo}" class="btn btn-sm">Live Demo</a>
-                <a href="${project.github}" class="btn btn-sm btn-outline">GitHub</a>
-            </div>
-        </div>
-    `;
-    
-    return card;
-}    // Add tooltip functionality
-function initializeTooltips() {
-    // Only initialize tooltips for tech project tags, not for game project tags
-    const tags = document.querySelectorAll('.tech-project-tag');
-    
-    tags.forEach(tag => {
-        tag.addEventListener('mouseover', function(e) {
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.textContent = this.getAttribute('title');
-            
-            document.body.appendChild(tooltip);
-            
-            const rect = this.getBoundingClientRect();
-            tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-            tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
-            
-            setTimeout(() => tooltip.classList.add('show'), 10);
-            
-            this.addEventListener('mouseleave', function() {
-                tooltip.classList.remove('show');
-                setTimeout(() => tooltip.remove(), 300);
-            }, { once: true });
-        });
-    });
-}
-
-// Get descriptions for technology tags (for tooltips)
-function getTagDescription(tag) {
-    const descriptions = {
-        'Unity': 'A powerful cross-platform game engine',
-        'C#': 'A modern, object-oriented programming language',
-        'C++': 'A high-performance programming language',
-        '3D Game': 'Games with three-dimensional graphics and gameplay',
-        'Unreal Engine': 'A state-of-the-art game engine with photorealistic rendering',
-        'Procedural Generation': 'Algorithm-based content creation',
-        'Game Design': 'The art of designing game concepts and mechanics',
-        'Python': 'A versatile, high-level programming language',
-        'TensorFlow': 'An open-source machine learning framework',
-        'React': 'A JavaScript library for building user interfaces',
-        'OpenGL': 'A cross-language, cross-platform API for rendering',
-        'Editor Scripting': 'Creating custom tools within game engines'
-    };
-    
-    return descriptions[tag] || tag;
-}
-
-// Make showNotification available globally
-window.showNotification = showNotification;
-
-// Function to create tech project cards with image sliders
-function createTechProjectCard(project) {
-    const card = document.createElement('div');
-    card.className = 'tech-project-card';
-    
-    const tagsHTML = project.tags ? project.tags.map(tag => `<span class="tech-project-tag" title="${getTagDescription(tag)}">${tag}</span>`).join('') : '';
-    
-    // Ensure project.images is an array (fallback for older project data)
-    const images = project.images || [project.image || 'images/placeholder.jpg'];
-    
-    // Create image slider HTML
-    const sliderImagesHTML = images.map(image => 
-        `<img src="${image}" alt="${project.title}">`
-    ).join('');
-    
-    // Create slider dots HTML (only if multiple images)
-    const sliderDotsHTML = images.length > 1 ? 
-        images.map((_, index) => 
-            `<div class="slider-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></div>`
-        ).join('') : '';
-    
-    // Add image counter for multiple images
-    const sliderCounter = images.length > 1 ? 
-        `<div class="slider-counter">1/${images.length}</div>` : '';
-    
-    card.innerHTML = `
-        <div class="tech-project-slider" data-project="${project.title.replace(/\s+/g, '-').toLowerCase()}">
-            ${images.length > 1 ? `
-            <div class="slider-control prev">
-                <i class="fas fa-chevron-left"></i>
-            </div>
-            <div class="slider-control next">
-                <i class="fas fa-chevron-right"></i>
-            </div>
-            ${sliderCounter}
-            ` : ''}
-            <div class="tech-project-slider-container">
-                ${sliderImagesHTML}
-            </div>
-            ${sliderDotsHTML ? `<div class="slider-nav">${sliderDotsHTML}</div>` : ''}
-        </div>
-        <div class="tech-project-info">
-            <h3>${project.title}</h3>
-            <p>${project.description}</p>
-            <div class="tech-project-tags">
-                ${tagsHTML}
-            </div>
-            <div class="tech-project-links">
-                <a href="${project.demo}" class="btn btn-sm">Live Demo</a>
-                <a href="${project.github}" class="btn btn-sm btn-outline">GitHub</a>
-            </div>
-        </div>
-    `;
-    
-    return card;
-}
-
-// Initialize all image sliders
-function initializeSliders() {
-    const sliders = document.querySelectorAll('.tech-project-slider');
-    
-    sliders.forEach(slider => {
-        const container = slider.querySelector('.tech-project-slider-container');
-        const dots = slider.querySelectorAll('.slider-dot');
-        const prevBtn = slider.querySelector('.slider-control.prev');
-        const nextBtn = slider.querySelector('.slider-control.next');
-        const counter = slider.querySelector('.slider-counter');
-        
-        // Only initialize slider if it has multiple images
-        if (container.children.length <= 1) {
-            return;
-        }
-        
-        const imageCount = container.children.length;
-        let currentIndex = 0;
-        
-        // Function to navigate to a specific slide
-        const goToSlide = (index) => {
-            currentIndex = (index + imageCount) % imageCount; // Ensure index is in range
-            container.style.transform = `translateX(-${currentIndex * 100}%)`;
-            
-            // Update active dot
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
-            });
-            
-            // Update counter if it exists
-            if (counter) {
-                counter.textContent = `${currentIndex + 1}/${imageCount}`;
-            }
-        };
-        
-        // Set up event listeners for dots
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => goToSlide(index));
-        });
-        
-        // Set up event listeners for prev/next buttons
-        if (prevBtn) {
-            prevBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent event bubbling
-                goToSlide(currentIndex - 1);
-            });
-        }
-        
-        if (nextBtn) {
-            nextBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent event bubbling
-                goToSlide(currentIndex + 1);
-            });
-        }
-        
-        // Add keyboard navigation when slider is hovered
-        slider.addEventListener('mouseenter', () => {
-            slider.setAttribute('tabindex', '0');
-            slider.focus({preventScroll: true});
-        });
-        
-        slider.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                goToSlide(currentIndex - 1);
-                e.preventDefault();
-            } else if (e.key === 'ArrowRight') {
-                goToSlide(currentIndex + 1);
-                e.preventDefault();
-            }
-        });
-        
-        // Auto-rotate slides every 5 seconds
-        const sliderId = slider.dataset.project;
-        let intervalId = setInterval(() => goToSlide(currentIndex + 1), 5000);
-        
-        // Pause auto-rotation on hover
-        slider.addEventListener('mouseenter', () => clearInterval(intervalId));
-        slider.addEventListener('mouseleave', () => {
-            intervalId = setInterval(() => goToSlide(currentIndex + 1), 5000);
-        });
-        
-        // Add swipe gesture support for mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        slider.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        slider.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-        
-        function handleSwipe() {
-            const swipeThreshold = 50; // Minimum distance for a swipe
-            
-            if (touchEndX < touchStartX - swipeThreshold) {
-                // Swipe left, go to next slide
-                goToSlide(currentIndex + 1);
-            } else if (touchEndX > touchStartX + swipeThreshold) {
-                // Swipe right, go to previous slide
-                goToSlide(currentIndex - 1);
-            }
-        }
-    });
 }

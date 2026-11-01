@@ -27,7 +27,7 @@ echo -e "${YELLOW}📝 Updating cache busting versions...${NC}"
 # Update index.html
 if [ -f "index.html" ]; then
     # Update CSS and JS version parameters
-    sed -i '' "s/\?v=[0-9]\+\.[0-9]\+\.[0-9]\+\.*[0-9]*/?v=$VERSION/g" index.html
+    sed -i '' -E "s/\?v=[0-9]+(\.[0-9]+)*/?v=$VERSION/g" index.html
     echo -e "${GREEN}✅ Updated index.html${NC}"
 else
     echo -e "${RED}❌ index.html not found${NC}"
@@ -36,7 +36,7 @@ fi
 # Update any other HTML files
 for html_file in *.html; do
     if [ "$html_file" != "index.html" ] && [ -f "$html_file" ]; then
-        sed -i '' "s/\?v=[0-9]\+\.[0-9]\+\.[0-9]\+\.*[0-9]*/?v=$VERSION/g" "$html_file"
+        sed -i '' -E "s/\?v=[0-9]+(\.[0-9]+)*/?v=$VERSION/g" "$html_file"
         echo -e "${GREEN}✅ Updated $html_file${NC}"
     fi
 done

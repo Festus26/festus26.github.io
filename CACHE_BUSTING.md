@@ -13,9 +13,6 @@ This document explains how to solve browser caching issues so visitors always se
 - `.htaccess` - Apache server cache control rules
 - Cache headers for different file types
 
-### 3. **JavaScript Utilities**
-- `js/cache-buster.js` - Dynamic cache busting utilities
-
 ## 🎯 How It Works
 
 ### Current Implementation
@@ -25,12 +22,12 @@ Your HTML now includes version parameters on all CSS and JS files:
 <script src="js/main.js?v=1.2.0"></script>
 ```
 
-### Meta Tags Added
-```html
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-```
+### Game of Life
+The iframe URL carries the same `?v=` version (`game_of_life/game_of_life.html?v=...`), and that page
+passes it on to `game_of_life.js` and `game_of_life.wasm`, so a new build always loads as a matching pair.
+
+> Note: the site is hosted on GitHub Pages, which ignores `.htaccess` and serves every file with
+> `Cache-Control: max-age=600`. The `?v=` parameters are what actually force fresh files.
 
 ## 🚀 Usage Instructions
 

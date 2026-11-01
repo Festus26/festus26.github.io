@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Website</title>
-    <!-- Cache control meta tags -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <title>Semih Yıldırım · Game Developer</title>
+    <meta name="description" content="Portfolio of Semih Yıldırım, game developer and co-founder of Team Sermath. Games, projects, and an interactive Game of Life built in C and WebAssembly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://semihyildirim.dev/">
+    <meta property="og:title" content="Semih Yıldırım · Game Developer">
+    <meta property="og:description" content="Game developer and co-founder of Team Sermath.">
+    <meta property="og:image" content="https://semihyildirim.dev/images/FESTUS-1200.png">
     
     <!-- CSS files with cache busting -->
-    <link rel="stylesheet" href="css/style.css?v=1.2.0">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="stylesheet" href="css/style.css?v=1.2.1">
     <link rel="stylesheet" href="css/styles.css?v=1.2.0">
     <link rel="stylesheet" href="css/github.css?v=1.2.0">
     <link rel="stylesheet" href="css/team-sermath.css?v=1.2.0">
     <link rel="stylesheet" href="css/section-transitions.css?v=1.2.0">
     <link rel="stylesheet" href="css/game-cards.css?v=1.2.0">
-    <link rel="stylesheet" href="css/game-demo.css?v=1.2.0">
-    <link rel="stylesheet" href="css/tech-projects.css?v=1.2.0">
+    <link rel="stylesheet" href="css/game-demo.css?v=1.2.2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/animations.css?v=1.2.0">
+    <link rel="stylesheet" href="css/animations.css?v=1.2.1">
 </head>
 <body>
     <!-- Fixed background elements -->
@@ -35,7 +38,7 @@
                 <a href="#about">About Me</a>
                 <a href="#team-sermath">Team Sermath</a>
                 <a href="#games">Games</a>
-                <a href="#tech">Projects</a>
+                <a href="#game-of-life-demo">Game of Life</a>
                 <a href="#skills">Skills</a>
                 <a href="#github">GitHub</a>
             </div>
@@ -59,15 +62,14 @@
             <h2>About Me</h2>
             <div class="about-content">
                 <div class="about-image animate slide-left">
-                    <img src="images/FESTUS.png" alt="Profile picture">
+                    <img src="images/FESTUS-1200.png" alt="Rocket launching past a star" width="1200" height="1200">
                 </div>
                 <div class="about-text animate slide-right">
-                    <p>I am a Computer Science student in Yıldız Technical University specializing in game development. With my passion for creating games that makes people feel the special moments, I strive to design experiences that resonate with players on a deeper level.</p>
-                    <p>My technical skills include mainly Unity game engine, programming languages such as C#, C, and Java. I am also familiar with game design principles and 3D modeling software.</p>
+                    <p>I am a Computer Science student at Yıldız Technical University, specializing in game development. Driven by a passion for games that give players special moments, I strive to design experiences that resonate with them on a deeper level.</p>
+                    <p>I work mainly with the Unity game engine and program in C#, C, and Java. I am also familiar with game design principles and 3D modeling software.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-artstation"></i></a>
+                        <a href="https://github.com/Festus26" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/semih-yildirim-" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
             </div>
@@ -146,10 +148,7 @@
             <div class="team-footer">
                 <a href="https://teamsermath.com" class="team-website-link">teamsermath.com <i class="fas fa-external-link-alt"></i></a>
                 <div class="team-social">
-                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" title="Steam"><i class="fab fa-steam"></i></a>
-                    <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="https://store.steampowered.com/developer/team-sermath" target="_blank" rel="noopener" title="Steam" aria-label="Team Sermath on Steam"><i class="fab fa-steam"></i></a>
                 </div>
             </div>
         </div>
@@ -164,14 +163,34 @@
         </div>
     </section>
 
-    <!-- <section id="tech" class="tech-section projects">
+    <!-- Game of Life Interactive Demo -->
+    <section id="game-of-life-demo" class="game-demo-section">
         <div class="container">
-            <h2>Projects</h2>
-            <div class="tech-project-grid">
-                Tech Project Cards will be dynamically loaded from main.js 
+            <h2>🎮 Game of Life</h2>
+            <p class="demo-description">My take on Conway's classic: three colors of cells, each with its own survival rules</p>
+            <div class="game-demo-container">
+                <iframe 
+                    src="game_of_life/game_of_life.html?v=1.2.2" 
+                    class="game-demo-iframe"
+                    title="Conway's Game of Life Interactive Demo"
+                    loading="lazy"
+                    allowfullscreen>
+                </iframe>
             </div>
+            <ul class="demo-controls">
+                <li><kbd>Click</kbd> place / remove a cell (while paused)</li>
+                <li><kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> yellow / red / blue cells</li>
+                <li><kbd>Space</kbd> play / pause</li>
+                <li><kbd>↑</kbd> <kbd>↓</kbd> faster / slower</li>
+                <li><kbd>R</kbd> back to your starting pattern</li>
+                <li><kbd>Q</kbd> clear the board</li>
+            </ul>
+            <p class="demo-info">
+                <i class="fas fa-info-circle"></i> Built with C and raylib, compiled to WebAssembly ·
+                <a href="https://github.com/Festus26/GameOfLife" target="_blank" rel="noopener">View source</a>
+            </p>
         </div>
-    </section> -->
+    </section>
 
     <section id="skills" class="skills">
         <div class="container">
@@ -184,7 +203,6 @@
                         <li>Game Design</li>
                         <li>3D Modeling</li>
                         <li>C#</li>
-                        <li>C</li>
                     </ul>
                 </div>
                 <div class="skill-category">
@@ -199,25 +217,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Game of Life Interactive Demo -->
-    <section id="game-of-life-demo" class="game-demo-section">
-        <div class="container">
-            <h2>🎮 Game of Life</h2>
-            <p class="demo-description">Experience my implementation of the classic cellular automaton</p>
-            <div class="game-demo-container">
-                <iframe 
-                    src="game_of_life/game_of_life.html" 
-                    class="game-demo-iframe"
-                    title="Conway's Game of Life Interactive Demo"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <p class="demo-info">
-                <i class="fas fa-info-circle"></i> Built with C and raylib, compiled to WebAssembly
-            </p>
         </div>
     </section>
 
@@ -244,10 +243,10 @@
     <div id="notification-container"></div>
     
     <!-- Scripts with cache busting -->
-    <script src="js/main.js?v=1.2.0"></script>
+    <script src="js/main.js?v=1.2.2"></script>
     <script src="js/space-animation.js?v=1.2.0"></script>
     <script src="js/space-effects.js?v=1.2.0"></script>
-    <script src="js/github.js?v=1.2.0"></script>
+    <script src="js/github.js?v=1.2.1"></script>
     <script src="js/section-transitions.js?v=1.2.0"></script>
 </body>
 </html>
